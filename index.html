@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title>KWIK-E</title>
+
+    <link rel="stylesheet" href="styles/app.css" />
+    <link rel="stylesheet" href="styles/typekit.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
+
+  </head>
+
+  <body ng-app="application">
+
+    <section data-searchbar>
+
+      <header>Walmart</header>
+
+      <search-controls></search-controls>
+
+    </section>
+
+    <section data-product-list>
+
+      <recommendations></recommendations>
+      <product-list></product-list>
+
+    </section>
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="bower_components/he/he.js"></script>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/services.js"></script>
+    <script src="scripts/controllers.js"></script>
+    <script src="scripts/directives.js"></script>
+
+    <script type="text/ng-template" id="search-controls.html">
+      <label>
+        <i class="fa fa-search"></i>
+        <input type="text" ng-model="search.searchString" ng-change="search.onSearchStringChange()" placeholder="Search Catalog" />
+      </label>
+    </script>
+
+    <script type="text/ng-template" id="product-list.html">
+
+      <product ng-repeat="product in search.products.items">
+      </product>
+
+    </script>
+
+    <script type="text/ng-template" id="recommendations.html">
+
+      <product ng-repeat="product in recommendations.products.items">
+      </product>
+
+    </script>
+
+    <script type="text/ng-template" id="product.html">
+
+      <article data-product-id="{{ product.id }}">
+
+        <h3>{{ product.name }}</h3>
+        <img ng-src="{{ product.images.large }}" alt="{{ product.name }}" />
+        <h4>{{ product.prices.sale | currency }}</h4>
+
+        <p ng-bind-html="product.descriptions.short"></p>
+
+      </article>
+
+      <!-- <pre>{{ product | json }}</pre> -->
+
+    </script>
+
+  </body>
+
+</html>
